@@ -72,10 +72,10 @@ class RtmBot(object):
         for plugin in glob.glob(directory+'/plugins/*.py') + glob.glob(directory+'/plugins/*/*.py'):
             logging.info(plugin)
             name = plugin.split('/')[-1][:-3]
-#            try:
-            self.bot_plugins.append(Plugin(name))
-#            except:
-#                print "error loading plugin %s" % name
+            try:
+                self.bot_plugins.append(Plugin(name))
+            except:
+                print("error loading plugin {}".format(name))
 
 class Plugin(object):
     def __init__(self, name, plugin_config={}):
