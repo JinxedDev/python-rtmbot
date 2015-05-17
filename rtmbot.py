@@ -59,7 +59,7 @@ class RtmBot(object):
                     if limiter == True:
                         time.sleep(.1)
                         limiter = False
-                    message = output[1].encode('ascii','ignore')
+                    message = output[1].encode('utf8')
                     channel.send_message("{}".format(message))
                     limiter = True
     def crons(self):
@@ -167,8 +167,7 @@ def main_loop():
 
 if __name__ == "__main__":
     directory = os.path.abspath(os.path.dirname(sys.argv[0]))
-
-    config = yaml.load(file('rtmbot.conf', 'r'))
+    config = yaml.load(open('rtmbot.conf', 'r'))
     debug = config["DEBUG"]
     bot = RtmBot(config["SLACK_TOKEN"])
     site_plugins = []
