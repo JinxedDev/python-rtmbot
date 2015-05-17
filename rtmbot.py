@@ -55,12 +55,12 @@ class RtmBot(object):
             limiter = False
             for output in plugin.do_output():
                 channel = self.slack_client.server.channels.find(output[0])
-                if channel != None and output[1] != None:
+                if channel is not None and output[1] != None:
                     if limiter == True:
                         time.sleep(.1)
                         limiter = False
-                    message = output[1].encode('utf8')
-                    channel.send_message("{}".format(message))
+                    message = output[1].encode('utf-8')
+                    channel.send_message("{}".format(message.decode('utf-8')))
                     limiter = True
     def crons(self):
         for plugin in self.bot_plugins:
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     files_currently_downloading = []
     job_hash = {}
 
-    if config.has_key("DAEMON"):
+    if "DAEMON" in config:
         if config["DAEMON"]:
             import daemon
             with daemon.DaemonContext():
