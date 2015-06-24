@@ -55,8 +55,8 @@ class RtmBot(object):
             limiter = False
             for output in plugin.do_output():
                 channel = self.slack_client.server.channels.find(output[0])
-                if channel is not None and output[1] != None:
-                    if limiter == True:
+                if channel is not None and output[1] is not None:
+                    if limiter is True:
                         time.sleep(.1)
                         limiter = False
                     message = output[1].encode('utf-8')
